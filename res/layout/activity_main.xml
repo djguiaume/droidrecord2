@@ -21,7 +21,8 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp"
-        android:text="@string/button_browse" />
+        android:text="@string/button_browse"
+        android:onClick="toBrowser" />
 
     <Button
         android:id="@+id/button2"

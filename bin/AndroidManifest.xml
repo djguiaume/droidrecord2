@@ -24,11 +24,19 @@
         </activity>
         <activity
             android:name="com.persil.droidrecorder.RecorderViewActivity"
-            android:label="@string/title_activity_recorder_view" 
+            android:label="@string/title_activity_recorder_view"
             android:parentActivityName="com.persil.droidrecorder.MainActivity" >
-	        <meta-data
-	            android:name="android.support.PARENT_ACTIVITY"
-	            android:value="com.persil.droidrecorder.MainActivity" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.persil.droidrecorder.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.persil.droidrecorder.BrowserViewActivity"
+            android:label="@string/title_activity_bowser_view" 
+            android:parentActivityName="com.persil.droidrecorder.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.persil.droidrecorder.MainActivity" />
         </activity>
     </application>
 

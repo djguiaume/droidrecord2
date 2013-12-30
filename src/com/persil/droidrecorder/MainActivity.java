@@ -25,8 +25,12 @@ public class MainActivity extends Activity {
     public void toRecorder(View view) {
         // Do something in response to button
     	Intent intent = new Intent(this, RecorderViewActivity.class);
-    	String message = "toto";
-    	intent.putExtra(EXTRA_MESSAGE, message);
+    	startActivity(intent);
+    }
+    
+    public void toBrowser(View view) {
+        // Do something in response to button
+    	Intent intent = new Intent(this, BrowserViewActivity.class);
     	startActivity(intent);
     }
     

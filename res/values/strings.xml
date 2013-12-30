@@ -8,5 +8,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_recorder_view">RevorderViewActivity</string>
     <string name="newapi">NewApi</string>
+    <string name="title_activity_bowser_view">BowserViewActivity</string>
 
 </resources>
