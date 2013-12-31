@@ -6,8 +6,14 @@
     <string name="button_browse">Browse</string>
     <string name="button_recorder">record</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_recorder_view">RevorderViewActivity</string>
+    <string name="title_activity_recorder_view">RecorderViewActivity</string>
     <string name="newapi">NewApi</string>
     <string name="title_activity_bowser_view">BowserViewActivity</string>
-
+    <string-array name="audio_encoder_array">
+        <item>AAC Low Complexity (AAC-LC) audio codec</item>
+        <item>Enhanced Low Delay AAC (AAC-ELD) audio codec</item>
+        <item>AMR (Narrowband) audio codec</item>
+        <item>AMR (Wideband) audio codec</item>
+        <item>High Efficiency AAC (HE-AAC) audio codec</item>
+    </string-array>
 </resources>
