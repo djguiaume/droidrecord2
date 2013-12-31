@@ -3,8 +3,8 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
     android:background="@drawable/back"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -25,13 +25,25 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="122dp"
             android:onClick="toRecorder"
-            android:text="@string/button_recorder" />
+            android:text="@string/button_recorder"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:layout_width="171dp"
+            android:layout_height="161dp"
+            android:fitsSystemWindows="true"
+            android:onClick="toRecorder"
+            android:scaleType="fitCenter"
+            android:src="@drawable/big_red"
+            android:visibility="visible" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.31"
         android:gravity="bottom|center_horizontal"
         android:orientation="vertical" >
 
