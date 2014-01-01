@@ -1,6 +1,17 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!--
+    
+    <style name="CKButton" parent="android:style/Widget.Button">
+		<item name="android:textColor">@android:color/primary_text_dark</item>
+		<item name="android:background">#444444</item>
+		<item name="android:layout_margin">5dp</item>
+		<item name="android:textSize">20sp</item>
+		<item name="android:paddingTop">10dp</item>
+		<item name="android:paddingBottom">10dp</item>
+		<item name="android:paddingLeft">20dp</item>
+		<item name="android:paddingRight">20dp</item>
+	</style>
+    
+   <!--
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
@@ -15,8 +26,9 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-        <item name="android:textColor">@android:color/primary_text_dark</item>
-        <item name="android:button">@android:color/primary_text_dark</item>
+   		<item name="android:textColor">@android:color/primary_text_dark</item>
+        <item name="android:buttonStyle">@style/CKButton</item>
     </style>
-
+    
+    
 </resources>
