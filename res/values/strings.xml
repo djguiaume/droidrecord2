@@ -5,6 +5,8 @@
     <string name="action_settings">Settings</string>
     <string name="button_browse">Browse</string>
     <string name="button_recorder">record</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_recorder_view">RecorderViewActivity</string>
     <string name="newapi">NewApi</string>

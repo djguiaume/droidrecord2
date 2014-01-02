@@ -3,11 +3,14 @@ package com.persil.droidrecorder;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaRecorder;
 
@@ -68,6 +71,27 @@ public class RecorderViewActivity extends Activity {
     
     public void onStopButtonClick(View view) {
     	Log.d("RecorderView", "stopButton clicked");
+    	showSaveDialog();
+    }
+    
+    public void showSaveDialog() {	 
+    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+
+        builder.setView(inflater.inflate(R.layout.save_dialog, null))
+        	.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+        		@Override
+        		public void onClick(DialogInterface dialog, int id) {
+        			// sign in the user ...
+        		}
+        	})
+        	.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+        		public void onClick(DialogInterface dialog, int id) {
+        			//getDialog().cancel();
+        		}
+        	});
+        builder.create();
+        builder.show();
     }
     
     private long getFormat() {
@@ -77,7 +101,7 @@ public class RecorderViewActivity extends Activity {
     		MediaRecorder.OutputFormat.AMR_NB,
     		MediaRecorder.OutputFormat.AMR_WB,
     		MediaRecorder.OutputFormat.AAC_ADTS
-    	}; 
+    	};
     	Spinner formatSpinner = (Spinner) findViewById(R.id.formatSpinner);
     	return formatList[(int) formatSpinner.getSelectedItemId()];
     }
