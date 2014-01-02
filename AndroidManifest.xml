@@ -8,6 +8,8 @@
         android:minSdkVersion="11"
         android:targetSdkVersion="18" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -18,7 +20,6 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -32,11 +33,36 @@
         </activity>
         <activity
             android:name="com.persil.droidrecorder.BrowserViewActivity"
-            android:label="@string/title_activity_bowser_view" 
+            android:label="@string/title_activity_bowser_view"
             android:parentActivityName="com.persil.droidrecorder.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.persil.droidrecorder.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.persil.droidrecorder.FileChooser"
+            android:label="@string/title_activity_file_chooser"
+            android:parentActivityName="com.persil.droidrecorder.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.persil.droidrecorder.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.persil.droidrecorder.FileArrayAdapter"
+            android:label="@string/title_activity_file_array_adapter" >
+        </activity>
+        <activity
+            android:name="com.persil.droidrecorder.Item"
+            android:label="@string/title_activity_item" >
+        </activity>
+        <activity
+            android:name="com.persil.droidrecorder.PlayerView"
+            android:label="@string/title_activity_player_view"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:parentActivityName="com.persil.droidrecorder.FileChooser" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.persil.droidrecorder.FileChooser" />
         </activity>
     </application>
 

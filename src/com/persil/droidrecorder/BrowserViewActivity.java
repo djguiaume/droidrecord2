@@ -8,6 +8,13 @@ import android.view.Menu;
 
 public class BrowserViewActivity extends Activity {
 
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

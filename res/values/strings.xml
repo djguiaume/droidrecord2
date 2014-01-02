@@ -9,6 +9,7 @@
     <string name="title_activity_recorder_view">RecorderViewActivity</string>
     <string name="newapi">NewApi</string>
     <string name="title_activity_bowser_view">BowserViewActivity</string>
+
     <string-array name="audio_encoder_array">
         <item>AAC Low Complexity (AAC-LC) audio codec</item>
         <item>Enhanced Low Delay AAC (AAC-ELD) audio codec</item>
@@ -16,4 +17,11 @@
         <item>AMR (Wideband) audio codec</item>
         <item>High Efficiency AAC (HE-AAC) audio codec</item>
     </string-array>
+
+    <string name="title_activity_file_chooser">FileChooser</string>
+    <string name="title_activity_file_array_adapter">FileArrayAdapter</string>
+    <string name="title_activity_item">Item</string>
+    <string name="title_activity_player_view">PlayerView</string>
+    <string name="title_activity_players">Players</string>
+
 </resources>
