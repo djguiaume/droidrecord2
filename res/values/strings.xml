@@ -10,10 +10,10 @@
     <string name="newapi">NewApi</string>
     <string name="title_activity_bowser_view">BowserViewActivity</string>
     <string-array name="audio_encoder_array">
-        <item>AAC Low Complexity (AAC-LC) audio codec</item>
-        <item>Enhanced Low Delay AAC (AAC-ELD) audio codec</item>
-        <item>AMR (Narrowband) audio codec</item>
-        <item>AMR (Wideband) audio codec</item>
-        <item>High Efficiency AAC (HE-AAC) audio codec</item>
+        <item>3GPP media file format</item>
+        <item>MPEG4 media file format</item>
+        <item>AMR (Narrowband) file format</item>
+        <item>AMR (Wideband) file format</item>
+        <item>AAC ADTS file format</item>
     </string-array>
 </resources>
