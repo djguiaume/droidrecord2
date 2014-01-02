@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaRecorder;
 
 public class RecorderViewActivity extends Activity {
 
@@ -45,22 +47,39 @@ public class RecorderViewActivity extends Activity {
     public void onRecordButtonClick(View view) {
     	Log.d("RecorderView", "recordButton clicked");
     	ImageButton button = (ImageButton) view;
-    	Boolean recordStarted = (Boolean) button.getTag();
+    	Boolean recording = (Boolean) button.getTag();
+    	Spinner formatSpinner = (Spinner) findViewById(R.id.formatSpinner);
     	
-    	if (recordStarted) {
-    		button.setImageResource(R.drawable.record);
+    	if (recording) {
     		//TODO: pause recording
-    		button.setTag(new Boolean(false));
+    		recording = false;
     	}
     	else {
-    		button.setImageResource(R.drawable.pause);
     		//TODO: start recording
-    		button.setTag(new Boolean(true));
+    		recording = true;
+    		Log.d("RecorderView", String.valueOf(getFormat()));
     	}
+
+		button.setImageResource(
+				recording ? R.drawable.record : R.drawable.pause);
+		button.setTag(recording);
+		formatSpinner.setEnabled(recording);
     }
     
     public void onStopButtonClick(View view) {
     	Log.d("RecorderView", "stopButton clicked");
+    }
+    
+    private long getFormat() {
+    	long[] formatList = {
+    		MediaRecorder.OutputFormat.THREE_GPP,
+    		MediaRecorder.OutputFormat.MPEG_4,
+    		MediaRecorder.OutputFormat.AMR_NB,
+    		MediaRecorder.OutputFormat.AMR_WB,
+    		MediaRecorder.OutputFormat.AAC_ADTS
+    	}; 
+    	Spinner formatSpinner = (Spinner) findViewById(R.id.formatSpinner);
+    	return formatList[(int) formatSpinner.getSelectedItemId()];
     }
 
 }
