@@ -36,6 +36,7 @@
                 android:id="@+id/recordButton"
                 android:layout_width="70dp"
                 android:layout_height="59dp"
+                android:onClick="onRecordButtonClick"
                 android:scaleType="fitCenter"
                 android:src="@drawable/record" />
 
@@ -43,6 +44,7 @@
                 android:id="@+id/stopButton"
                 android:layout_width="70dp"
                 android:layout_height="59dp"
+                android:onClick="onStopButtonClick"
                 android:scaleType="fitCenter"
                 android:src="@drawable/stop" />
         </LinearLayout>
