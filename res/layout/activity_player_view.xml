@@ -37,20 +37,20 @@
         android:textAlignment="center" >
 
         <ImageButton
-            android:id="@+id/recordButton"
+            android:id="@+id/playButton"
             android:layout_width="70dp"
             android:layout_height="59dp"
             android:onClick="play"
             android:scaleType="fitCenter"
-            android:src="@drawable/record" />
+            android:src="@drawable/play" />
 
         <ImageButton
-            android:id="@+id/stopButton"
+            android:id="@+id/pauseButton"
             android:layout_width="70dp"
             android:layout_height="59dp"
             android:onClick="pause"
             android:scaleType="fitCenter"
-            android:src="@drawable/stop" />
+            android:src="@drawable/pause" />
     </LinearLayout>
 
 </LinearLayout>

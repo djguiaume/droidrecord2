@@ -6,7 +6,7 @@
         android:showAsAction="never"
         android:title="rename"/>
     <item
-        android:id="@+id/action_setting"
+        android:id="@+id/action_delete"
         android:orderInCategory="101"
         android:showAsAction="never"
         android:title="delete"/>

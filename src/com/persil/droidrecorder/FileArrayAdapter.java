@@ -1,6 +1,9 @@
 package com.persil.droidrecorder;
 
 import java.util.List; 
+
+import android.R.color;
+import android.R.drawable;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -23,11 +26,13 @@ public class FileArrayAdapter extends ArrayAdapter<Item>{
                 id = textViewResourceId;
                 items = objects;
         }
+        
         public Item getItem(int i)
          {
                  return items.get(i);
          }
-         @Override
+        
+        @Override
        public View getView(int position, View convertView, ViewGroup parent) {
                View v = convertView;
                if (v == null) {
@@ -57,6 +62,7 @@ public class FileArrayAdapter extends ArrayAdapter<Item>{
                        if(t3!=null)
                                 t3.setText(o.getDate());
                }
+               v.setBackgroundColor(color.transparent);
                return v;
        }
 }

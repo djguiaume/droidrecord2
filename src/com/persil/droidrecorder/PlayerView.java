@@ -10,16 +10,22 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -29,21 +35,23 @@ import android.widget.Toast;
 
 public class PlayerView extends Activity implements OnSeekBarChangeListener {
 	
-	private String fileName;
+		private static String fileName;
 	
 		public TextView songName,startTimeField,endTimeField;
-	   private MediaPlayer mediaPlayer;
-	   private double startTime = 0;
-	   private double finalTime = 0;
-	   private Handler mHandler = new Handler();;
-	   private SeekBar seekbar;
-	   private ImageButton playButton,pauseButton;
-	   private ShareActionProvider mShareActionProvider;
-	   public int oneTimeOnly = 0;
-	   Intent shareIntent;
-	   
-	   @Override
-	   protected void onCreate(Bundle savedInstanceState) {
+		private MediaPlayer mediaPlayer;
+		private double startTime = 0;
+		private double finalTime = 0;
+		private Handler mHandler = new Handler();;
+		private SeekBar seekbar;
+		private ImageButton playButton,pauseButton;
+		private ShareActionProvider mShareActionProvider;
+		public int oneTimeOnly = 0;
+		final Context context = this;
+		private String result;
+		Intent shareIntent;
+		
+		@Override
+	   	protected void onCreate(Bundle savedInstanceState) {
 	      super.onCreate(savedInstanceState);
 	      setContentView(R.layout.activity_player_view);
 	      fileName = getIntent().getExtras().getString("GetFileName");
@@ -51,8 +59,8 @@ public class PlayerView extends Activity implements OnSeekBarChangeListener {
 	      startTimeField =(TextView)findViewById(R.id.TextView1);
 	      //endTimeField =(TextView)findViewById(R.id.textView2);
 	      seekbar = (SeekBar)findViewById(R.id.seekBar1);
-	      playButton = (ImageButton)findViewById(R.id.recordButton);
-	      pauseButton = (ImageButton)findViewById(R.id.stopButton);
+	      playButton = (ImageButton)findViewById(R.id.playButton);
+	      pauseButton = (ImageButton)findViewById(R.id.pauseButton);
 	      songName.setText(fileName);
 	      mediaPlayer = MediaPlayer.create(this, Uri.fromFile(new File(Environment.getExternalStorageDirectory()+File.separator+"DroidRecorder"+File.separator+fileName)));
 	      seekbar.setClickable(true);
@@ -61,8 +69,7 @@ public class PlayerView extends Activity implements OnSeekBarChangeListener {
 	      
 	      shareIntent = new Intent();
 	      shareIntent.setAction(Intent.ACTION_SEND);
-	      shareIntent.putExtra("GetFileName",
-	    		  Environment.getExternalStorageDirectory()+File.separator+"DroidRecorder"+File.separator+fileName);
+	      shareIntent.putExtra("GetFileName",fileName);
 	      shareIntent.putExtra(Intent.EXTRA_STREAM,
 	    		  Uri.fromFile(new File(Environment.getExternalStorageDirectory()+File.separator+"DroidRecorder"+File.separator+fileName)));
 	      shareIntent.setType("audio/*");
@@ -123,10 +130,11 @@ public class PlayerView extends Activity implements OnSeekBarChangeListener {
 			   startTime = mediaPlayer.getCurrentPosition();
 			   if (startTime >= mediaPlayer.getDuration())
 			   {
-				   mediaPlayer.pause();
+				   mediaPlayer.seekTo(mediaPlayer.getDuration());
 				   pauseButton.setEnabled(false);
 				   playButton.setEnabled(true);
 				   startTime = 0;
+				   seekbar.setProgress((int)startTime);
 				   Log.w("stopable", "startTime=0");
 				   onStopThread();
 			   }
@@ -144,13 +152,13 @@ public class PlayerView extends Activity implements OnSeekBarChangeListener {
 	   
 	   private void reinitialize()
 	   {
-		   fileName = getIntent().getExtras().getString("GetFileName");
+		   //fileName = getIntent().getExtras().getString("GetFileName");
 	        songName = (TextView)findViewById(R.id.textView1);
 		    startTimeField =(TextView)findViewById(R.id.TextView1);
 		    //endTimeField =(TextView)findViewById(R.id.textView2);
 		    seekbar = (SeekBar)findViewById(R.id.seekBar1);
-		    playButton = (ImageButton)findViewById(R.id.recordButton);
-		    pauseButton = (ImageButton)findViewById(R.id.stopButton);
+		    playButton = (ImageButton)findViewById(R.id.playButton);
+		    pauseButton = (ImageButton)findViewById(R.id.pauseButton);
 		    songName.setText(fileName);
 		    finalTime = mediaPlayer.getDuration();
 		    seekbar.setMax((int) finalTime);
@@ -175,6 +183,70 @@ public class PlayerView extends Activity implements OnSeekBarChangeListener {
 	      playButton.setEnabled(true);
 	   }	
 
+	   private void actionRename(String newName)
+	   {
+		   File basePath = new File(Environment.getExternalStorageDirectory()+File.separator+"DroidRecorder"+File.separator);
+		   String extension = fileName.substring(fileName.lastIndexOf('.'));
+		   File from = new File(basePath,fileName);
+		   File to = new File(basePath,newName+extension);
+		   if (from.renameTo(to))
+		   {
+			   fileName = newName + extension;
+			   reinitialize();
+			   shareIntent.putExtra(Intent.EXTRA_STREAM,
+			    		  Uri.fromFile(new File(Environment.getExternalStorageDirectory()+File.separator+"DroidRecorder"+File.separator+fileName)));
+			   setShareIntent(shareIntent);
+		   }
+	   }
+	   
+	   private void showRename()
+	   {
+		// get prompts.xml view
+			LayoutInflater li = LayoutInflater.from(context);
+			View promptsView = li.inflate(R.layout.prompt, null);
+
+			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+			// set prompts.xml to alert dialog builder
+			alertDialogBuilder.setView(promptsView);
+
+			final EditText userInput = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput);
+			userInput.setText(fileName.substring(0, fileName.lastIndexOf('.')));
+
+			// set dialog message
+			alertDialogBuilder
+				.setCancelable(false)
+				.setPositiveButton("OK",
+				  new DialogInterface.OnClickListener() {
+				    public void onClick(DialogInterface dialog,int id) {
+					// get user input and set it to result
+					// edit text
+					result = userInput.getText().toString();
+					Log.d("popup", userInput.getText().toString());
+					actionRename(result);
+				    }
+				  })
+				.setNegativeButton("Cancel",
+				  new DialogInterface.OnClickListener() {
+				    public void onClick(DialogInterface dialog,int id) {
+					dialog.cancel();
+				    }
+				  });
+
+			// create alert dialog
+			AlertDialog alertDialog = alertDialogBuilder.create();
+
+			// show it
+			alertDialog.show();
+	   }
+	   
+	   private void actionDelete()
+	   {
+		   File file = new File(Environment.getExternalStorageDirectory()+File.separator+"DroidRecorder"+File.separator+fileName);
+		   file.delete();
+		   onBackPressed();
+	   }
+	   
 	   @Override
 	    public void onProgressChanged(SeekBar seekBar, int progress,
 	    		boolean fromUser) {
@@ -196,6 +268,21 @@ public class PlayerView extends Activity implements OnSeekBarChangeListener {
 		    // Return true to display menu
 		    return true;
 		}
+	   
+	   @Override
+	   public boolean onOptionsItemSelected(MenuItem item) {
+	       // Handle item selection
+	       switch (item.getItemId()) {
+	           case R.id.action_rename:
+	               showRename();
+	               return true;
+	           case R.id.action_delete:
+	               actionDelete();
+	               return true;
+	           default:
+	               return super.onOptionsItemSelected(item);
+	       }
+	   }
 	   
 	   private void setShareIntent(Intent shareIntent) {
 		    if (mShareActionProvider != null) {
