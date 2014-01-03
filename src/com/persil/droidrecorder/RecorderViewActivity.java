@@ -1,20 +1,26 @@
 package com.persil.droidrecorder;
 
+import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.MediaRecorder;
+
+import com.persil.droidrecorder.Recorder;
 
 public class RecorderViewActivity extends Activity {
+	private Recorder recorder;
 
 	//@SuppressLint("NewApi");
 	@SuppressLint("NewApi") @Override
@@ -26,8 +32,25 @@ public class RecorderViewActivity extends Activity {
             // Show the Up button in the action bar.
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
+		
+    	Spinner formatSpinner = (Spinner) findViewById(R.id.formatSpinner);
+		recorder = new Recorder();
+    	formatSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+    	    @Override
+    	    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+    			//recorder.initRecord(getExt(), getFormat(), getApplicationContext());
+    	    }
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				//recorder.initRecord(getExt(), getFormat(), getApplicationContext());
+				
+			}
+
+    	});
 		ImageButton recordButton = (ImageButton) findViewById(R.id.recordButton);
 		Boolean recordStarted = new Boolean(false);
+		
 		recordButton.setTag(recordStarted);
 	}
 
@@ -60,7 +83,9 @@ public class RecorderViewActivity extends Activity {
     	else {
     		//TODO: start recording
     		recording = true;
+    		
     		Log.d("RecorderView", String.valueOf(getFormat()));
+    		Log.d("RecorderView", getExt());
     	}
 
 		button.setImageResource(
@@ -82,20 +107,20 @@ public class RecorderViewActivity extends Activity {
         	.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
         		@Override
         		public void onClick(DialogInterface dialog, int id) {
-        			// sign in the user ...
+        			Log.d("RecorderView", "Save clicked");
         		}
         	})
         	.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
         		public void onClick(DialogInterface dialog, int id) {
-        			//getDialog().cancel();
+        			Log.d("RecorderView", "Cancel clicked");
         		}
         	});
         builder.create();
         builder.show();
     }
-    
-    private long getFormat() {
-    	long[] formatList = {
+
+    private int getFormat() {
+    	int[] formatList = {
     		MediaRecorder.OutputFormat.THREE_GPP,
     		MediaRecorder.OutputFormat.MPEG_4,
     		MediaRecorder.OutputFormat.AMR_NB,
@@ -106,4 +131,15 @@ public class RecorderViewActivity extends Activity {
     	return formatList[(int) formatSpinner.getSelectedItemId()];
     }
 
+    private String getExt() {
+    	String[] formatList = {
+    		".3gp",
+    		".mp4",
+    		".amr",
+    		".amr",
+    		".aac"
+    	};
+    	Spinner formatSpinner = (Spinner) findViewById(R.id.formatSpinner);
+    	return formatList[(int) formatSpinner.getSelectedItemId()];
+    }
 }
