@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.annotation.SuppressLint;
@@ -21,6 +22,7 @@ import com.persil.droidrecorder.Recorder;
 
 public class RecorderViewActivity extends Activity {
 	private Recorder recorder;
+	private View save_view;
 
 	//@SuppressLint("NewApi");
 	@SuppressLint("NewApi") @Override
@@ -35,27 +37,25 @@ public class RecorderViewActivity extends Activity {
 		
     	Spinner formatSpinner = (Spinner) findViewById(R.id.formatSpinner);
 		recorder = new Recorder();
+		recorder.initRecord(getExt(), getFormat());
     	formatSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
     	    @Override
     	    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-    			//recorder.initRecord(getExt(), getFormat(), getApplicationContext());
+    			recorder.setExention(getExt());
+    			recorder.setFormat(getFormat());
     	    }
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
-				//recorder.initRecord(getExt(), getFormat(), getApplicationContext());
-				
+    			recorder.setExention(getExt());
+    			recorder.setFormat(getFormat());
 			}
-
     	});
-		ImageButton recordButton = (ImageButton) findViewById(R.id.recordButton);
-		Boolean recordStarted = new Boolean(false);
-		
-		recordButton.setTag(recordStarted);
 	}
 
     @Override
     public void onBackPressed() {
+    	recorder.resetRecording();
     	super.onBackPressed();
         overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
@@ -72,42 +72,31 @@ public class RecorderViewActivity extends Activity {
     
     public void onRecordButtonClick(View view) {
     	Log.d("RecorderView", "recordButton clicked");
-    	ImageButton button = (ImageButton) view;
-    	Boolean recording = (Boolean) button.getTag();
     	Spinner formatSpinner = (Spinner) findViewById(R.id.formatSpinner);
     	
-    	if (recording) {
-    		//TODO: pause recording
-    		recording = false;
-    	}
-    	else {
-    		//TODO: start recording
-    		recording = true;
-    		
-    		Log.d("RecorderView", String.valueOf(getFormat()));
-    		Log.d("RecorderView", getExt());
-    	}
-
-		button.setImageResource(
-				recording ? R.drawable.record : R.drawable.pause);
-		button.setTag(recording);
-		formatSpinner.setEnabled(recording);
+		recorder.startRecording();
+		formatSpinner.setEnabled(false);
     }
     
     public void onStopButtonClick(View view) {
     	Log.d("RecorderView", "stopButton clicked");
+    	recorder.stopRecording();
     	showSaveDialog();
     }
     
-    public void showSaveDialog() {	 
+    public void showSaveDialog() {
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
 
-        builder.setView(inflater.inflate(R.layout.save_dialog, null))
+        save_view = inflater.inflate(R.layout.save_dialog, null);
+        builder.setView(save_view)
         	.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
         		@Override
         		public void onClick(DialogInterface dialog, int id) {
         			Log.d("RecorderView", "Save clicked");
+        			EditText file_name =
+        					(EditText) save_view.findViewById(R.id.save_dialog_file_name);
+        			recorder.rename(file_name.getText().toString());
         		}
         	})
         	.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

@@ -25,5 +25,6 @@
     <string name="title_activity_item">Item</string>
     <string name="title_activity_player_view">PlayerView</string>
     <string name="title_activity_players">Players</string>
+    <string name="input_file_name">Input a file name:</string>
 
 </resources>
