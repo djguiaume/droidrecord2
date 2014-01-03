@@ -13,6 +13,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaRecorder;
+import com.persil.droidrecorder2.R;
 
 public class RecorderViewActivity extends Activity {
 

@@ -15,6 +15,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ListView;
+import com.persil.droidrecorder2.R;
 
 public class FileChooser extends ListActivity {
 

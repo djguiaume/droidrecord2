@@ -39,6 +39,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.persil.droidrecorder2.R;
 
 public class PlayerView extends Activity implements OnSeekBarChangeListener {
 

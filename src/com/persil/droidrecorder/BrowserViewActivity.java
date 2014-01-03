@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.Menu;
+import com.persil.droidrecorder2.R;
 
 public class BrowserViewActivity extends Activity {
 
