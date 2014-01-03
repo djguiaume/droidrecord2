@@ -26,6 +26,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.media.AudioManager;
+import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.provider.MediaStore;
@@ -57,9 +59,11 @@ public class PlayerView extends Activity implements OnSeekBarChangeListener {
 	final Context context = this;
 	private String result;
 	Intent shareIntent;
+	AudioManager am;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		am = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_player_view);
 		fileName = getIntent().getExtras().getString("GetFileName");
@@ -70,6 +74,7 @@ public class PlayerView extends Activity implements OnSeekBarChangeListener {
 		playButton = (ImageButton)findViewById(R.id.playButton);
 		pauseButton = (ImageButton)findViewById(R.id.pauseButton);
 		songName.setText(fileName);
+
 		mediaPlayer = MediaPlayer.create(this, Uri.fromFile(new File(Environment.getExternalStorageDirectory()+File.separator+"DroidRecorder"+File.separator+fileName)));
 		seekbar.setClickable(true);
 		pauseButton.setEnabled(false);
@@ -95,26 +100,39 @@ public class PlayerView extends Activity implements OnSeekBarChangeListener {
 	}
 
 	public void play(View view){
-		Toast.makeText(getApplicationContext(), "Playing sound", 
-				Toast.LENGTH_SHORT).show();
-		mediaPlayer.start();
-		finalTime = mediaPlayer.getDuration();
-		startTime = mediaPlayer.getCurrentPosition();
-		if(oneTimeOnly == 0){
-			seekbar.setMax((int) finalTime);
-			oneTimeOnly = 1;
-		} 
+		int result = am.requestAudioFocus(afChangeListener,
+				// Use the music stream.
+				AudioManager.STREAM_MUSIC,
+				// Request permanent focus.
+				AudioManager.AUDIOFOCUS_GAIN);
 
-		startTimeField.setText(String.format("%d:%d", 
-				TimeUnit.MILLISECONDS.toMinutes((long) startTime),
-				TimeUnit.MILLISECONDS.toSeconds((long) startTime) - 
-				TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.
-						toMinutes((long) startTime)))
-				);
-		seekbar.setProgress((int)startTime);
-		onStartThread(100);
-		pauseButton.setEnabled(true);
-		playButton.setEnabled(false);
+		if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+			//am.unregisterMediaButtonEventReceiver(RemoteControlReceiver);
+			
+			Toast.makeText(getApplicationContext(), "Playing sound", 
+					Toast.LENGTH_SHORT).show();
+			mediaPlayer.start();
+			finalTime = mediaPlayer.getDuration();
+			startTime = mediaPlayer.getCurrentPosition();
+			if(oneTimeOnly == 0){
+				seekbar.setMax((int) finalTime);
+				oneTimeOnly = 1;
+			} 
+
+			startTimeField.setText(String.format("%d:%d", 
+					TimeUnit.MILLISECONDS.toMinutes((long) startTime),
+					TimeUnit.MILLISECONDS.toSeconds((long) startTime) - 
+					TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.
+							toMinutes((long) startTime)))
+					);
+			seekbar.setProgress((int)startTime);
+			onStartThread(100);
+			pauseButton.setEnabled(true);
+			playButton.setEnabled(false);
+			// Start playback.
+		}
+		else 
+			onBackPressed();
 	}
 
 	public void onStopThread() {
@@ -185,6 +203,7 @@ public class PlayerView extends Activity implements OnSeekBarChangeListener {
 		mediaPlayer.pause();
 		pauseButton.setEnabled(false);
 		playButton.setEnabled(true);
+		am.abandonAudioFocus(afChangeListener);
 	}	
 
 	private void actionRename(String newName)
@@ -367,6 +386,7 @@ public class PlayerView extends Activity implements OnSeekBarChangeListener {
 		mediaPlayer.release();
 		super.onBackPressed();
 		overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+		am.abandonAudioFocus(afChangeListener);
 	}
 
 	@SuppressLint("NewApi") @Override
@@ -377,6 +397,7 @@ public class PlayerView extends Activity implements OnSeekBarChangeListener {
 			mediaPlayer.release();
 			boolean ret = super.onNavigateUp();
 			overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+			am.abandonAudioFocus(afChangeListener);
 			return ret;
 		}
 		return false;
@@ -395,6 +416,23 @@ public class PlayerView extends Activity implements OnSeekBarChangeListener {
 		mediaPlayer.seekTo(progress);
 		startTime = progress;
 	}
+	OnAudioFocusChangeListener afChangeListener = new OnAudioFocusChangeListener() {
+		public void onAudioFocusChange(int focusChange) {
+			if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
+				mediaPlayer.pause();
+				pauseButton.setEnabled(false);
+				playButton.setEnabled(true);
+			} else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+				mediaPlayer.start();
+				pauseButton.setEnabled(true);
+				playButton.setEnabled(false);
+			} else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+				//am.unregisterMediaButtonEventReceiver(RemoteControlReceiver);
+				mediaPlayer.stop();
+				am.abandonAudioFocus(afChangeListener);
+			}
+		}
+	};
 
 }
 /*String fileName;

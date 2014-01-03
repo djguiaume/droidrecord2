@@ -83,4 +83,12 @@ public class FileChooser extends ListActivity {
     	}
        return false;
     }
+    
+	@Override
+	public void onResume()
+	{
+		fill(currentDir);
+        getWindow().setBackgroundDrawableResource(R.drawable.back);
+        super.onResume();
+	}
 }
