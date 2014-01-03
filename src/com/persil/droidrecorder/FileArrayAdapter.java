@@ -3,7 +3,6 @@ package com.persil.droidrecorder;
 import java.util.List; 
 
 import android.R.color;
-import android.R.drawable;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;

@@ -13,6 +13,8 @@ import android.os.Environment;
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import com.persil.droidrecorder2.R;
@@ -27,7 +29,11 @@ public class FileChooser extends ListActivity {
         super.onCreate(savedInstanceState);
         currentDir = new File(Environment.getExternalStorageDirectory()+File.separator+"DroidRecorder");;
         fill(currentDir);
-        getWindow().setBackgroundDrawableResource(R.drawable.back);
+        Log.d("filechooser", "orientation = "+ this.getResources().getConfiguration().orientation);
+        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+        	getWindow().setBackgroundDrawableResource(R.drawable.back_l);
+        else
+        	getWindow().setBackgroundDrawableResource(R.drawable.back);
     }
     
     private void fill(File f)
