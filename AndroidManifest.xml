@@ -27,6 +27,7 @@
         <activity
             android:name="com.persil.droidrecorder.RecorderViewActivity"
             android:label="@string/title_activity_recorder_view"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:parentActivityName="com.persil.droidrecorder.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

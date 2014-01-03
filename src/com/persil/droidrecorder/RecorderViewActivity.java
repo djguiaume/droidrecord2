@@ -14,6 +14,8 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
+
 import com.persil.droidrecorder.Recorder;
 import com.persil.droidrecorder2.R;
 
@@ -128,4 +130,16 @@ public class RecorderViewActivity extends Activity {
     	Spinner formatSpinner = (Spinner) findViewById(R.id.formatSpinner);
     	return formatList[(int) formatSpinner.getSelectedItemId()];
     }
+
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+			setContentView(R.layout.activity_recorder_view);
+			Log.e("On Config Change","LANDSCAPE");
+		}
+		else {
+			setContentView(R.layout.activity_recorder_view);
+			Log.e("On Config Change","PORTRAIT");
+		}
+	}
 }

@@ -2,6 +2,9 @@ package com.persil.droidrecorder;
 import java.io.File;
 import java.io.IOException;
 
+import com.persil.droidrecorder2.R;
+
+import android.content.res.Configuration;
 import android.media.MediaRecorder;
 import android.os.Environment;
 import android.util.Log;
@@ -96,5 +99,4 @@ public class Recorder {
 	   File to = new File(basePath,newName+Extantion);
 	   from.renameTo(to);
 	}
-
 }
