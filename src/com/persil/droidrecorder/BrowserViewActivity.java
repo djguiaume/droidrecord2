@@ -20,13 +20,6 @@ public class BrowserViewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_bowser_view);
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.bowser_view, menu);
-		return true;
-	}
 	
 	@Override
     public void onBackPressed() {
