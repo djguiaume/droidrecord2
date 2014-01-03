@@ -15,6 +15,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ListView;
+import com.persil.droidrecorder2.R;
 
 public class FileChooser extends ListActivity {
 
@@ -82,4 +83,12 @@ public class FileChooser extends ListActivity {
     	}
        return false;
     }
+    
+	@Override
+	public void onResume()
+	{
+		fill(currentDir);
+        getWindow().setBackgroundDrawableResource(R.drawable.back);
+        super.onResume();
+	}
 }

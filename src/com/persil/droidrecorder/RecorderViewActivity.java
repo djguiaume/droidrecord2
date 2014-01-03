@@ -18,7 +18,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
-import com.persil.droidrecorder.Recorder;
+import com.persil.droidrecorder2.Recorder;
 
 public class RecorderViewActivity extends Activity {
 	private Recorder recorder;
