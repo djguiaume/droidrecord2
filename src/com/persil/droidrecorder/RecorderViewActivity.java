@@ -9,16 +9,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-
-import com.persil.droidrecorder2.Recorder;
+import com.persil.droidrecorder.Recorder;
+import com.persil.droidrecorder2.R;
 
 public class RecorderViewActivity extends Activity {
 	private Recorder recorder;
