@@ -429,6 +429,8 @@ public class PlayerView extends Activity implements OnSeekBarChangeListener {
 			} else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
 				//am.unregisterMediaButtonEventReceiver(RemoteControlReceiver);
 				mediaPlayer.pause();
+				pauseButton.setEnabled(false);
+				playButton.setEnabled(true);
 				am.abandonAudioFocus(afChangeListener);
 			}
 		}
