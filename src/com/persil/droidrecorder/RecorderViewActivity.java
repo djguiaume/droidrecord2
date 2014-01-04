@@ -56,6 +56,7 @@ public class RecorderViewActivity extends Activity {
     			recorder.setFormat(getFormat());
 			}
     	});
+    	updateControlState();
 	}
 
     @Override
@@ -129,6 +130,7 @@ public class RecorderViewActivity extends Activity {
         			EditText file_name =
         					(EditText) save_view.findViewById(R.id.save_dialog_file_name);
         			recorder.rename(file_name.getText().toString());
+        			onBackPressed();
         		}
         	})
         	.setNegativeButton(
