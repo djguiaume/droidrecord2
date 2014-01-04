@@ -137,6 +137,8 @@ public class RecorderViewActivity extends Activity {
         			R.string.cancel, new DialogInterface.OnClickListener() {
         		public void onClick(DialogInterface dialog, int id) {
         			Log.d("RecorderView", "Cancel clicked");
+        			recorder.deleteFile();
+        	    	onBackPressed();
         		}
         	});
         builder.create();
@@ -147,9 +149,7 @@ public class RecorderViewActivity extends Activity {
     	int[] formatList = {
     		MediaRecorder.OutputFormat.THREE_GPP,
     		MediaRecorder.OutputFormat.MPEG_4,
-    		MediaRecorder.OutputFormat.AMR_NB,
-    		MediaRecorder.OutputFormat.AMR_WB,
-    		MediaRecorder.OutputFormat.AAC_ADTS
+    		MediaRecorder.OutputFormat.AMR_NB
     	};
     	Spinner formatSpinner = (Spinner) findViewById(R.id.formatSpinner);
     	return formatList[(int) formatSpinner.getSelectedItemId()];
@@ -159,9 +159,7 @@ public class RecorderViewActivity extends Activity {
     	String[] formatList = {
     		".3gp",
     		".mp4",
-    		".amr",
-    		".amr",
-    		".aac"
+    		".amr"
     	};
     	Spinner formatSpinner = (Spinner) findViewById(R.id.formatSpinner);
     	return formatList[(int) formatSpinner.getSelectedItemId()];
