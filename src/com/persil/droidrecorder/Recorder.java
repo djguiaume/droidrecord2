@@ -101,6 +101,13 @@ public class Recorder {
 		}
 	}
 
+	public void deleteFile() {
+		File Tmp = new File(file_path + Extantion);
+		if (Tmp.exists()) {
+		Tmp.delete();
+		}
+	}
+	
 	public void rename(String newName) {
 		if (!newName.isEmpty() && (!file_path.isEmpty() && !Extantion.isEmpty())) {
 	   File basePath = new File(Environment.getExternalStorageDirectory()
