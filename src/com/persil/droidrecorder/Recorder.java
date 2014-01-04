@@ -13,7 +13,6 @@ public class Recorder {
 
 	private MediaRecorder mediaRecorder = null;
 	private boolean state;
-	private boolean start;
 	private String file_path = "";
 	private	int Format;
 	private String Extantion = ".";
@@ -23,7 +22,6 @@ public class Recorder {
 			mediaRecorder = new MediaRecorder();
 		}
 		state = false;
-		start = true;
 		Format = 0;
 	}
 
@@ -56,27 +54,24 @@ public class Recorder {
 	}
 
 	public void startRecording() {
-		if (start == true && mediaRecorder != null) {
+		if (state == true && mediaRecorder != null) {
 			mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
 			mediaRecorder.setOutputFormat(Format);
 			mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 			mediaRecorder.setOutputFile(file_path + Extantion);
 			Log.d("FilePath:", file_path + Extantion);
-			start = false;
+			resumeRecording();
 		}
-		else if (start == true && mediaRecorder == null) {
+		else if (state == true && mediaRecorder == null) {
 			mediaRecorder = new MediaRecorder();
 			mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
 			mediaRecorder.setOutputFormat(Format);
 			mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 			mediaRecorder.setOutputFile(file_path + Extantion);
 			Log.d("FilePath:", file_path + Extantion);
-			start = false;
-		}
-		if (state == true) {
 			resumeRecording();
-			state = false;
 		}
+
 	}
 
 	public void resumeRecording()
@@ -96,12 +91,11 @@ public class Recorder {
 	public void stopRecording() {
 		if (mediaRecorder != null) {
 		mediaRecorder.stop();
+		resetRecording();
 		}
 	}
 
 	public void resetRecording() {
-		state = false;
-		start = true;
 		if (mediaRecorder != null) {
 			mediaRecorder.reset();
 			mediaRecorder.release();
