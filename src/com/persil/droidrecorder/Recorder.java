@@ -28,7 +28,9 @@ public class Recorder {
 	}
 
 	public void setExention(String ext) {
+		if (!ext.isEmpty()) {
 		Extantion = ext;
+		}
 	}
 
 	public void setFormat(int format) {
@@ -36,7 +38,9 @@ public class Recorder {
 	}
 
 	public void updateOutputFile() {
+		if (!file_path.isEmpty() && !Extantion.isEmpty()) {
 		mediaRecorder.setOutputFile(file_path + Extantion);
+		}
 	}
 
 	public void initRecord(String ext, int Formate) {
@@ -52,7 +56,7 @@ public class Recorder {
 	}
 
 	public void startRecording() {
-		if (start == true) {
+		if (start == true && mediaRecorder != null) {
 			mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
 			mediaRecorder.setOutputFormat(Format);
 			mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
@@ -68,6 +72,7 @@ public class Recorder {
 
 	public void resumeRecording()
 	{
+		if (mediaRecorder != null) {
 		try {
 			mediaRecorder.prepare();
 		} catch (IllegalStateException e) {
@@ -76,10 +81,13 @@ public class Recorder {
 			e.printStackTrace();
 		}
 		mediaRecorder.start();
+		}
 	}
 
 	public void stopRecording() {
+		if (mediaRecorder != null) {
 		mediaRecorder.stop();
+		}
 	}
 
 	public void resetRecording() {
@@ -92,11 +100,13 @@ public class Recorder {
 	}
 
 	public void rename(String newName) {
+		if (!newName.isEmpty() && (!file_path.isEmpty() && !Extantion.isEmpty())) {
 	   File basePath = new File(Environment.getExternalStorageDirectory()
 			   +File.separator+"DroidRecorder"+File.separator);
 	   String fileName = file_path.substring(file_path.lastIndexOf(File.separator));
 	   File from = new File(basePath,fileName+Extantion);
 	   File to = new File(basePath,newName+Extantion);
 	   from.renameTo(to);
+		}
 	}
 }
