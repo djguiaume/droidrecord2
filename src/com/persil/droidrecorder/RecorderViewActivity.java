@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -20,8 +21,9 @@ import com.persil.droidrecorder.Recorder;
 import com.persil.droidrecorder2.R;
 
 public class RecorderViewActivity extends Activity {
-	private Recorder recorder;
-	private View save_view;
+	private Boolean		recording = false;
+	private Recorder	recorder;
+	private View		save_view;
 
 	//@SuppressLint("NewApi");
 	@SuppressLint("NewApi") @Override
@@ -33,13 +35,17 @@ public class RecorderViewActivity extends Activity {
             // Show the Up button in the action bar.
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
-		
-    	Spinner formatSpinner = (Spinner) findViewById(R.id.formatSpinner);
+
 		recorder = new Recorder();
 		recorder.initRecord(getExt(), getFormat());
+
+    	Spinner formatSpinner = (Spinner) findViewById(R.id.formatSpinner);
     	formatSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
     	    @Override
-    	    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+    	    public void onItemSelected(
+    	    		AdapterView<?> parentView,
+    	    		View selectedItemView,
+    	    		int position, long id) {
     			recorder.setExention(getExt());
     			recorder.setFormat(getFormat());
     	    }
@@ -62,25 +68,51 @@ public class RecorderViewActivity extends Activity {
     @SuppressLint("NewApi") @Override
     public boolean	onNavigateUp() {
     	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+    		recorder.resetRecording();
 	    	boolean ret = super.onNavigateUp();
-	        overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+	        overridePendingTransition(
+	        		R.anim.push_right_in, R.anim.push_right_out);
 			return ret;
     	}
        return false;
     }
+
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+			setContentView(R.layout.activity_recorder_view);
+			Log.d("On Config Change","LANDSCAPE");
+		}
+		else {
+			setContentView(R.layout.activity_recorder_view);
+			Log.d("On Config Change","PORTRAIT");
+		}
+		updateControlState();
+	}
     
     public void onRecordButtonClick(View view) {
     	Log.d("RecorderView", "recordButton clicked");
-    	Spinner formatSpinner = (Spinner) findViewById(R.id.formatSpinner);
     	
 		recorder.startRecording();
-		formatSpinner.setEnabled(false);
+		recording = true;
+		updateControlState();
     }
     
     public void onStopButtonClick(View view) {
     	Log.d("RecorderView", "stopButton clicked");
     	recorder.stopRecording();
+    	recording = false;
+		updateControlState();
     	showSaveDialog();
+    }
+    
+    public void updateControlState() {
+		ImageButton recordButton = (ImageButton) findViewById(R.id.recordButton);
+		Spinner formatSpinner = (Spinner) findViewById(R.id.formatSpinner);
+		ImageButton stopButton = (ImageButton) findViewById(R.id.stopButton);
+		recordButton.setEnabled(!recording);
+		formatSpinner.setEnabled(!recording);
+		stopButton.setEnabled(recording);
     }
     
     public void showSaveDialog() {
@@ -89,7 +121,8 @@ public class RecorderViewActivity extends Activity {
 
         save_view = inflater.inflate(R.layout.save_dialog, null);
         builder.setView(save_view)
-        	.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+        	.setPositiveButton(
+        			R.string.save, new DialogInterface.OnClickListener() {
         		@Override
         		public void onClick(DialogInterface dialog, int id) {
         			Log.d("RecorderView", "Save clicked");
@@ -98,7 +131,8 @@ public class RecorderViewActivity extends Activity {
         			recorder.rename(file_name.getText().toString());
         		}
         	})
-        	.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+        	.setNegativeButton(
+        			R.string.cancel, new DialogInterface.OnClickListener() {
         		public void onClick(DialogInterface dialog, int id) {
         			Log.d("RecorderView", "Cancel clicked");
         		}
@@ -130,16 +164,4 @@ public class RecorderViewActivity extends Activity {
     	Spinner formatSpinner = (Spinner) findViewById(R.id.formatSpinner);
     	return formatList[(int) formatSpinner.getSelectedItemId()];
     }
-
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-		if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
-			setContentView(R.layout.activity_recorder_view);
-			Log.e("On Config Change","LANDSCAPE");
-		}
-		else {
-			setContentView(R.layout.activity_recorder_view);
-			Log.e("On Config Change","PORTRAIT");
-		}
-	}
 }
