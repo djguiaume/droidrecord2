@@ -41,6 +41,12 @@ public class RecorderTest extends TestCase {
 			System.out.println("StartRecording Success !");
 		else
 			System.out.println("StartRecording Fail !");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (recorder.stopRecording() == true)
 			System.out.println("StopRecording Success !");
 		else
@@ -72,6 +78,12 @@ public class RecorderTest extends TestCase {
 			System.out.println("StartRecording Success !");
 		else
 			System.out.println("StartRecording Fail !");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (recorder2.stopRecording() == true)
 			System.out.println("StopRecording Success !");
 		else
@@ -124,6 +136,12 @@ public class RecorderTest extends TestCase {
 			System.out.println("StartRecording Success !");
 		else
 			System.out.println("StartRecording Fail !");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		recorder.stopRecording();
 		recorder.resetRecording();
 		recorder.deleteFile();
@@ -136,25 +154,18 @@ public class RecorderTest extends TestCase {
 		recorder.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		recorder.updateOutputFile();
 		recorder.startRecording();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (recorder.stopRecording() == true)
 		System.out.println("StopRecording Success !");
 	else
 		System.out.println("StopRecording Fail !");
 		recorder.resetRecording();
 		recorder.deleteFile();
-		
-		Recorder recorder2 = new Recorder();
-		recorder2.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4);
-		recorder2.setExention(".3gp");
-		recorder2.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
-		recorder2.updateOutputFile();
-		recorder2.startRecording();
-		recorder2.resetRecording();
-		if (recorder2.stopRecording() == true)
-			System.out.println("StopRecording Success !");
-		else
-			System.out.println("StopRecording Fail !");
-		recorder2.deleteFile();
 	}
 	
 	public void testResetRecording() {
@@ -164,11 +175,13 @@ public class RecorderTest extends TestCase {
 		recorder.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		recorder.updateOutputFile();
 		recorder.startRecording();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		recorder.stopRecording();
-		if (recorder.resetRecording() == true)
-			System.out.println("ResetRecording Success !");
-		else
-			System.out.println("ResetRecording Fail !");
 		if (recorder.resetRecording() == true)
 			System.out.println("ResetRecording Success !");
 		else
@@ -182,6 +195,12 @@ public class RecorderTest extends TestCase {
 		recorder.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		recorder.updateOutputFile();
 		recorder.startRecording();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		recorder.stopRecording();
 		recorder.resetRecording();
 		if (recorder.deleteFile() == true)
@@ -196,6 +215,12 @@ public class RecorderTest extends TestCase {
 		recorder2.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		recorder2.updateOutputFile();
 		recorder2.startRecording();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		recorder2.stopRecording();
 		recorder2.resetRecording();
 		if (recorder2.rename("RenameTest") == true)
