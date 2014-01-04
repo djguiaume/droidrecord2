@@ -16,8 +16,6 @@
         <item>3GPP media file format</item>
         <item>MPEG4 media file format</item>
         <item>AMR (Narrowband) file format</item>
-        <item>AMR (Wideband) file format</item>
-        <item>AAC ADTS file format</item>
     </string-array>
 
     <string name="title_activity_file_chooser">FileChooser</string>
