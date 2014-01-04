@@ -20,6 +20,7 @@
         android:orientation="vertical" >
 
         <ImageButton
+            android:id="@+id/recorderButton"
             android:layout_width="171dp"
             android:layout_height="161dp"
             android:background="@android:color/transparent"
@@ -38,7 +39,7 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/browserButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="toBrowser"

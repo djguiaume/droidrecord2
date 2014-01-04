@@ -54,7 +54,7 @@ public class PlayerView extends Activity{
 	private SeekBar seekbar;
 	private ImageButton playButton,pauseButton;
 	private ShareActionProvider mShareActionProvider;
-	public int oneTimeOnly = 0;
+	private int oneTimeOnly = 0;
 	final Context context = this;
 	private String result;
 	Intent shareIntent;
@@ -195,12 +195,12 @@ public class PlayerView extends Activity{
 
 	// UPDATER
 	
-	public void onStopThread() {
+	private void onStopThread() {
 		UpdateSongTime.stop();
 		mHandler.removeCallbacks(UpdateSongTime);
 	}
 
-	public void onStartThread(long delayMillis) {
+	private void onStartThread(long delayMillis) {
 		mHandler.postDelayed(UpdateSongTime, delayMillis);
 	}
 
@@ -338,7 +338,7 @@ public class PlayerView extends Activity{
 		setMediaDB(targetLocation);
 	}
 	
-	public static String getMimeType(String url)
+	private static String getMimeType(String url)
 	{
 		String type = null;
 		String extension = MimeTypeMap.getFileExtensionFromUrl(url);
@@ -452,19 +452,3 @@ public class PlayerView extends Activity{
 	};
 
 }
-/*String fileName;
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_player_view);
-		fileName = getIntent().getExtras().getString("GetFileName");
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.player_view, menu);
-		return true;
-	}
- */
