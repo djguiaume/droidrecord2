@@ -15,14 +15,14 @@ public class Recorder {
 	private boolean state;
 	private String file_path = "";
 	private	int Format;
-	private String Extantion = ".";
+	private String Extantion = ".3gp";
 
 	public Recorder(){
 		if (mediaRecorder == null) {
 			mediaRecorder = new MediaRecorder();
 		}
 		state = false;
-		Format = 0;
+		Format = MediaRecorder.OutputFormat.THREE_GPP;
 	}
 
 	public void setExention(String ext) {
@@ -74,7 +74,7 @@ public class Recorder {
 
 	}
 
-	public void resumeRecording()
+	private void resumeRecording()
 	{
 		if (mediaRecorder != null) {
 		try {
