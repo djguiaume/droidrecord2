@@ -25,8 +25,12 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 		browserButton = (Button) mainActivity.findViewById(R.id.browserButton);
 		
 	}
-	
-	protected void testAddButtonOnScreen()
+
+	protected void tearDown() throws Exception {
+		super.tearDown();
+	}
+
+	public void testAddButtonOnScreen()
 	 {
 		int fullWidth = mainLayout.getWidth();  
 		   int fullHeight = mainLayout.getHeight();  
@@ -41,11 +45,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 		   assertTrue("Add button off the bottom of the screen", fullHeight  
 		           + mainLayoutLocation[1] > outRect.height() + viewLocation[1]);
 	 }
-
-	protected void tearDown() throws Exception {
-		super.tearDown();
-	}
-
+	
 	public void testOnCreateBundle() {
 		fail("Not yet implemented"); // TODO
 	}
