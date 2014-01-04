@@ -3,11 +3,13 @@ package com.persil.droidrecorder;
 import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -23,6 +25,7 @@ import com.persil.droidrecorder2.R;
 public class RecorderViewActivity extends Activity {
 	private Boolean		recording = false;
 	private Recorder	recorder;
+	private Chronometer	recordTimer;
 	private View		save_view;
 
 	//@SuppressLint("NewApi");
@@ -56,6 +59,7 @@ public class RecorderViewActivity extends Activity {
     			recorder.setFormat(getFormat());
 			}
     	});
+    	recordTimer = (Chronometer) findViewById(R.id.recordTimer);
     	updateControlState();
 	}
 
@@ -79,6 +83,7 @@ public class RecorderViewActivity extends Activity {
     }
 
 	public void onConfigurationChanged(Configuration newConfig) {
+		long recordTimeSave =  recordTimer.getBase();
 		super.onConfigurationChanged(newConfig);
 		if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
 			setContentView(R.layout.activity_recorder_view);
@@ -88,6 +93,9 @@ public class RecorderViewActivity extends Activity {
 			setContentView(R.layout.activity_recorder_view);
 			Log.d("On Config Change","PORTRAIT");
 		}
+		recordTimer = (Chronometer) findViewById(R.id.recordTimer);
+		recordTimer.setBase(recordTimeSave);
+		recordTimer.start();
 		updateControlState();
 	}
     
@@ -95,6 +103,8 @@ public class RecorderViewActivity extends Activity {
     	Log.d("RecorderView", "recordButton clicked");
     	
 		recorder.startRecording();
+		recordTimer.setBase(SystemClock.elapsedRealtime());
+		recordTimer.start();
 		recording = true;
 		updateControlState();
     }
@@ -102,6 +112,7 @@ public class RecorderViewActivity extends Activity {
     public void onStopButtonClick(View view) {
     	Log.d("RecorderView", "stopButton clicked");
     	recorder.stopRecording();
+    	recordTimer.stop();
     	recording = false;
 		updateControlState();
     	showSaveDialog();
