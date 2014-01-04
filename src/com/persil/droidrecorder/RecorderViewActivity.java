@@ -56,6 +56,7 @@ public class RecorderViewActivity extends Activity {
     			recorder.setFormat(getFormat());
 			}
     	});
+    	updateControlState();
 	}
 
     @Override
