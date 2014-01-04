@@ -25,23 +25,27 @@ public class Recorder {
 		Format = MediaRecorder.OutputFormat.THREE_GPP;
 	}
 
-	public void setExention(String ext) {
+	public boolean setExention(String ext) {
 		if (!ext.isEmpty()) {
 		Extantion = ext;
+		return true;
 		}
+		return false;
 	}
 
 	public void setFormat(int format) {
 		Format = format;
 	}
 
-	public void updateOutputFile() {
+	public boolean updateOutputFile() {
 		if (!file_path.isEmpty() && !Extantion.isEmpty()) {
 		mediaRecorder.setOutputFile(file_path + Extantion);
+		return true;
 		}
+		return false;
 	}
 
-	public void initRecord(String ext, int Formate) {
+	public boolean initRecord(String ext, int Formate) {
 		Extantion = ext;
 		if (mediaRecorder == null) {
 			mediaRecorder = new MediaRecorder();
@@ -51,16 +55,19 @@ public class Recorder {
 					+ File.separator + "DroidRecorder" + File.separator;
 		file_path = file_path + System.currentTimeMillis();
 		state = true;
+		if (file_path.isEmpty())
+			return false;
+		return true;
 	}
 
-	public void startRecording() {
+	public boolean startRecording() {
 		if (state == true && mediaRecorder != null) {
 			mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
 			mediaRecorder.setOutputFormat(Format);
 			mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 			mediaRecorder.setOutputFile(file_path + Extantion);
-			Log.d("FilePath:", file_path + Extantion);
 			resumeRecording();
+			return true;
 		}
 		else if (state == true && mediaRecorder == null) {
 			mediaRecorder = new MediaRecorder();
@@ -68,9 +75,10 @@ public class Recorder {
 			mediaRecorder.setOutputFormat(Format);
 			mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 			mediaRecorder.setOutputFile(file_path + Extantion);
-			Log.d("FilePath:", file_path + Extantion);
 			resumeRecording();
+			return true;
 		}
+		return false;
 
 	}
 
@@ -88,27 +96,33 @@ public class Recorder {
 		}
 	}
 
-	public void stopRecording() {
+	public boolean stopRecording() {
 		if (mediaRecorder != null) {
 		mediaRecorder.stop();
+		return true;
 		}
+		return false;
 	}
 
-	public void resetRecording() {
+	public boolean resetRecording() {
 		if (mediaRecorder != null) {
 			mediaRecorder.reset();
 			mediaRecorder.release();
+			return true;
 		}
+		return false;
 	}
 
-	public void deleteFile() {
+	public boolean deleteFile() {
 		File Tmp = new File(file_path + Extantion);
 		if (Tmp.exists()) {
 		Tmp.delete();
+		return true;
 		}
+		return false;
 	}
 	
-	public void rename(String newName) {
+	public boolean rename(String newName) {
 		if (!newName.isEmpty() && (!file_path.isEmpty() && !Extantion.isEmpty())) {
 	   File basePath = new File(Environment.getExternalStorageDirectory()
 			   +File.separator+"DroidRecorder"+File.separator);
@@ -116,6 +130,8 @@ public class Recorder {
 	   File from = new File(basePath,fileName+Extantion);
 	   File to = new File(basePath,newName+Extantion);
 	   from.renameTo(to);
+	   return true;
 		}
+		return false;
 	}
 }

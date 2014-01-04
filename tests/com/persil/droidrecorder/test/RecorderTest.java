@@ -23,7 +23,188 @@ public class RecorderTest extends TestCase {
 	}
 
 	public void testRecorder() {
-		fail("Not yet implemented"); // TODO
+		Recorder recorder = new Recorder();
+		if (recorder.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4) == true)
+			System.out.println("InitRecord Correctly !");
+		else
+			System.out.println("InitRecord didn't work Correctly !");
+		if ((recorder.setExention(".3gp")) == true)
+			System.out.println("Extention .mp4 Set Correctly !");
+		else
+			System.out.println("try to set Extention with null string !");	
+		recorder.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
+		if (recorder.updateOutputFile() == true)
+			System.out.println("File update Correctly !");
+		else
+			System.out.println("File didn't update Correctly !");
+		if (recorder.startRecording() == true)
+			System.out.println("StartRecording Success !");
+		else
+			System.out.println("StartRecording Fail !");
+		if (recorder.stopRecording() == true)
+			System.out.println("StopRecording Success !");
+		else
+			System.out.println("StopRecording Fail !");
+		if (recorder.resetRecording() == true)
+			System.out.println("ResetRecording Success !");
+		else
+			System.out.println("ResetRecording Fail !");
+		if (recorder.deleteFile() == true)
+			System.out.println("DeleteFileRecording Success !");
+		else
+			System.out.println("DeleteFileRecording Fail !");
+		
+		Recorder recorder2 = new Recorder();
+		if (recorder2.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4) == true)
+			System.out.println("InitRecord Correctly !");
+		else
+			System.out.println("InitRecord didn't work Correctly !");
+		if ((recorder2.setExention(".3gp")) == true)
+			System.out.println("Extention .mp4 Set Correctly !");
+		else
+			System.out.println("try to set Extention with null string !");	
+		recorder2.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
+		if (recorder2.updateOutputFile() == true)
+			System.out.println("File update Correctly !");
+		else
+			System.out.println("File didn't update Correctly !");
+		if (recorder2.startRecording() == true)
+			System.out.println("StartRecording Success !");
+		else
+			System.out.println("StartRecording Fail !");
+		if (recorder2.stopRecording() == true)
+			System.out.println("StopRecording Success !");
+		else
+			System.out.println("StopRecording Fail !");
+		if (recorder2.resetRecording() == true)
+			System.out.println("ResetRecording Success !");
+		else
+			System.out.println("ResetRecording Fail !");
+		if (recorder2.rename("RenameTest") == true)
+			System.out.println("RenameRecording Success !");
+		else
+			System.out.println("RenameRecording Fail !");
 	}
 
+	public void testSetExention() {
+		Recorder recorder = new Recorder();
+		if ((recorder.setExention(".mp4")) == true)
+			System.out.println("Extention .mp4 Set Correctly !");
+		else
+			System.out.println("try to set Extention with null string !");	
+	}
+	
+	public void testUpdateOutputFile() {
+		Recorder recorder = new Recorder();
+		recorder.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4);
+		recorder.setExention(".3gp");
+		recorder.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
+		if (recorder.updateOutputFile() == true)
+			System.out.println("File update Correctly !");
+		else
+			System.out.println("File didn't update Correctly !");
+	}
+	
+	public void testInitRecord() {
+		Recorder recorder = new Recorder();
+		if (recorder.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4) == true)
+			System.out.println("InitRecord Correctly !");
+		else
+			System.out.println("InitRecord didn't work Correctly !");
+		
+	}
+	
+	public void testStartRecording() {
+		Recorder recorder = new Recorder();
+		recorder.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4);
+		recorder.setExention(".3gp");
+		recorder.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
+		recorder.updateOutputFile();
+		if (recorder.startRecording() == true)
+			System.out.println("StartRecording Success !");
+		else
+			System.out.println("StartRecording Fail !");
+		recorder.stopRecording();
+		recorder.resetRecording();
+		recorder.deleteFile();
+	}
+	
+	public void testStopRecording() {
+		Recorder recorder = new Recorder();
+		recorder.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4);
+		recorder.setExention(".3gp");
+		recorder.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
+		recorder.updateOutputFile();
+		recorder.startRecording();
+		if (recorder.stopRecording() == true)
+		System.out.println("StopRecording Success !");
+	else
+		System.out.println("StopRecording Fail !");
+		recorder.resetRecording();
+		recorder.deleteFile();
+		
+		Recorder recorder2 = new Recorder();
+		recorder2.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4);
+		recorder2.setExention(".3gp");
+		recorder2.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
+		recorder2.updateOutputFile();
+		recorder2.startRecording();
+		recorder2.resetRecording();
+		if (recorder2.stopRecording() == true)
+			System.out.println("StopRecording Success !");
+		else
+			System.out.println("StopRecording Fail !");
+		recorder2.deleteFile();
+	}
+	
+	public void testResetRecording() {
+		Recorder recorder = new Recorder();
+		recorder.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4);
+		recorder.setExention(".3gp");
+		recorder.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
+		recorder.updateOutputFile();
+		recorder.startRecording();
+		recorder.stopRecording();
+		if (recorder.resetRecording() == true)
+			System.out.println("ResetRecording Success !");
+		else
+			System.out.println("ResetRecording Fail !");
+		if (recorder.resetRecording() == true)
+			System.out.println("ResetRecording Success !");
+		else
+			System.out.println("ResetRecording Fail !");
+		recorder.deleteFile();
+	}
+	public void testDeleteFile() {
+		Recorder recorder = new Recorder();
+		recorder.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4);
+		recorder.setExention(".3gp");
+		recorder.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
+		recorder.updateOutputFile();
+		recorder.startRecording();
+		recorder.stopRecording();
+		recorder.resetRecording();
+		if (recorder.deleteFile() == true)
+			System.out.println("DeleteFileRecording Success !");
+		else
+			System.out.println("DeleteFileRecording Fail !");
+	}
+	public void testRename() {
+		Recorder recorder2 = new Recorder();
+		recorder2.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4);
+		recorder2.setExention(".3gp");
+		recorder2.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
+		recorder2.updateOutputFile();
+		recorder2.startRecording();
+		recorder2.stopRecording();
+		recorder2.resetRecording();
+		if (recorder2.rename("RenameTest") == true)
+			System.out.println("RenameRecording Success !");
+		else
+			System.out.println("RenameRecording Fail !");
+		if (recorder2.rename("") == true)
+			System.out.println("RenameRecording Success !");
+		else
+			System.out.println("RenameRecording Fail !");
+	}
 }
