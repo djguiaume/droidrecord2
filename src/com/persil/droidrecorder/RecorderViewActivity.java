@@ -107,7 +107,7 @@ public class RecorderViewActivity extends Activity {
     	showSaveDialog();
     }
     
-    public void updateControlState() {
+    private void updateControlState() {
 		ImageButton recordButton = (ImageButton) findViewById(R.id.recordButton);
 		Spinner formatSpinner = (Spinner) findViewById(R.id.formatSpinner);
 		ImageButton stopButton = (ImageButton) findViewById(R.id.stopButton);
@@ -116,7 +116,7 @@ public class RecorderViewActivity extends Activity {
 		stopButton.setEnabled(recording);
     }
     
-    public void showSaveDialog() {
+    private void showSaveDialog() {
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
 
