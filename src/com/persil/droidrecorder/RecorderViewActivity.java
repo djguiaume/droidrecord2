@@ -28,7 +28,6 @@ public class RecorderViewActivity extends Activity {
 	private Chronometer	recordTimer;
 	private View		save_view;
 
-	//@SuppressLint("NewApi");
 	@SuppressLint("NewApi") @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -12,6 +12,9 @@
     <string name="newapi">NewApi</string>
     <string name="title_activity_bowser_view">BowserViewActivity</string>
 
+    <string name="recorder_activity_chronometer">Chronometer</string>
+    <string name="recorder_activity_start_recording">Start recording</string>
+    <string name="recorder_activity_stop_recording">Stop recording</string>
     <string-array name="audio_encoder_array">
         <item>3GPP media file format</item>
         <item>MPEG4 media file format</item>

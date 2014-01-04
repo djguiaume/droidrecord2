@@ -14,7 +14,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="20"
         android:gravity="center_horizontal|center_vertical"
         android:orientation="vertical" >
@@ -23,8 +23,8 @@
             android:id="@+id/recordTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chronometer"
-            android:textSize="80dp" />
+            android:text="@string/recorder_activity_chronometer"
+            android:textSize="80sp" />
 
         <LinearLayout
             android:id="@+id/linearLayout1"
@@ -36,6 +36,7 @@
                 android:id="@+id/recordButton"
                 android:layout_width="70dp"
                 android:layout_height="59dp"
+                android:contentDescription="@string/recorder_activity_start_recording"
                 android:onClick="onRecordButtonClick"
                 android:scaleType="fitCenter"
                 android:src="@drawable/record" />
@@ -44,6 +45,7 @@
                 android:id="@+id/stopButton"
                 android:layout_width="70dp"
                 android:layout_height="59dp"
+                android:contentDescription="@string/recorder_activity_stop_recording"
                 android:onClick="onStopButtonClick"
                 android:scaleType="fitCenter"
                 android:src="@drawable/stop" />
