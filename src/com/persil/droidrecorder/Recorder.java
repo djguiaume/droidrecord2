@@ -64,6 +64,15 @@ public class Recorder {
 			Log.d("FilePath:", file_path + Extantion);
 			start = false;
 		}
+		else if (start == true && mediaRecorder == null) {
+			mediaRecorder = new MediaRecorder();
+			mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+			mediaRecorder.setOutputFormat(Format);
+			mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+			mediaRecorder.setOutputFile(file_path + Extantion);
+			Log.d("FilePath:", file_path + Extantion);
+			start = false;
+		}
 		if (state == true) {
 			resumeRecording();
 			state = false;
