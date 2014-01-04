@@ -93,8 +93,10 @@ public class RecorderViewActivity extends Activity {
 			Log.d("On Config Change","PORTRAIT");
 		}
 		recordTimer = (Chronometer) findViewById(R.id.recordTimer);
-		recordTimer.setBase(recordTimeSave);
-		recordTimer.start();
+		if (recording) {
+			recordTimer.setBase(recordTimeSave);
+			recordTimer.start();
+		}
 		updateControlState();
 	}
     
