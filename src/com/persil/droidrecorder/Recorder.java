@@ -91,7 +91,6 @@ public class Recorder {
 	public void stopRecording() {
 		if (mediaRecorder != null) {
 		mediaRecorder.stop();
-		resetRecording();
 		}
 	}
 
