@@ -23,7 +23,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 		MainActivity mainActivity = getActivity();
 		recorderButton = (ImageButton) mainActivity.findViewById(R.id.recorderButton);
 		browserButton = (Button) mainActivity.findViewById(R.id.browserButton);
-		
+		mainLayout = (View) mainActivity.findViewById(R.id.LinearLayout1);
 	}
 
 	protected void tearDown() throws Exception {
@@ -35,7 +35,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 		int fullWidth = mainLayout.getWidth();  
 		   int fullHeight = mainLayout.getHeight();  
 		   int[] mainLayoutLocation = new int[2];  
-		   mainLayout.getLocationOnScreen(mainLayoutLocation);  
+		   mainLayout.getLocationOnScreen(mainLayoutLocation);
 		   int[] viewLocation = new int[2];  
 		   recorderButton.getLocationOnScreen(viewLocation);  
 		   Rect outRect = new Rect();  
