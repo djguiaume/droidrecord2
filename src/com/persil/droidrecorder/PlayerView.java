@@ -28,7 +28,6 @@ import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
-import android.media.MediaPlayer.OnSeekCompleteListener;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;

@@ -1,7 +1,5 @@
 package com.persil.droidrecorder.test;
 
-import java.io.File;
-
 import android.media.MediaRecorder;
 
 import com.persil.droidrecorder.Recorder;

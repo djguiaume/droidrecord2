@@ -6,12 +6,10 @@ import com.persil.droidrecorder2.R;
 import android.graphics.Rect;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
 	private ImageButton recorderButton;
-	private Button browserButton;
 	private View mainLayout;
 	
 	public MainActivityTest() {
@@ -22,7 +20,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 		super.setUp();
 		MainActivity mainActivity = getActivity();
 		recorderButton = (ImageButton) mainActivity.findViewById(R.id.recorderButton);
-		browserButton = (Button) mainActivity.findViewById(R.id.browserButton);
 		mainLayout = (View) mainActivity.findViewById(R.id.LinearLayout1);
 	}
 
@@ -45,17 +42,4 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 		   assertTrue("Add button off the bottom of the screen", fullHeight  
 		           + mainLayoutLocation[1] > outRect.height() + viewLocation[1]);
 	 }
-	
-	public void testOnCreateBundle() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	public void testToRecorder() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	public void testToBrowser() {
-		fail("Not yet implemented"); // TODO
-	}
-
 }
