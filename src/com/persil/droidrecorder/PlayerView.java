@@ -76,11 +76,9 @@ public class PlayerView extends Activity{
 		initializeShareIntent();
 		mediaPlayer.setOnCompletionListener (new OnCompletionListener()
 		{
-
 			@Override
 			public void onCompletion(MediaPlayer arg0) {
 				onStopThread();
-				//mediaPlayer.seekTo(mediaPlayer.getDuration());
 				pauseButton.setEnabled(false);
 				playButton.setEnabled(true);
 				startTime = 0;
@@ -91,19 +89,13 @@ public class PlayerView extends Activity{
 					mediaPlayer.setDataSource(basePath+fileName);
 					mediaPlayer.prepare();
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				onStopThread();
 				am.abandonAudioFocus(afChangeListener);
-				
-				
-			}
-			
-		}
-		);
+			}		
+		});
 	}
-
 
 	private void initialize()
 	{
@@ -127,7 +119,7 @@ public class PlayerView extends Activity{
 		playButton.setEnabled(!isPlaying);
 	}
 
-	
+
 	private void initializeShareIntent()
 	{
 		shareIntent = new Intent();
@@ -139,7 +131,7 @@ public class PlayerView extends Activity{
 	}
 
 	// MEDIA PLAYER
-	
+
 	private void releasMediaPlayer()
 	{
 		onStopThread();
@@ -147,7 +139,7 @@ public class PlayerView extends Activity{
 		mediaPlayer.release();
 		am.abandonAudioFocus(afChangeListener);
 	}
-	
+
 	private void pauseMediaPlayer()
 	{
 		mediaPlayer.pause();
@@ -155,14 +147,12 @@ public class PlayerView extends Activity{
 		playButton.setEnabled(true);
 		am.abandonAudioFocus(afChangeListener);
 	}
-	
+
 	public void play(View view){
 		int result = am.requestAudioFocus(afChangeListener,
 				AudioManager.STREAM_MUSIC,
 				AudioManager.AUDIOFOCUS_GAIN);
 		if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-			//am.unregisterMediaButtonEventReceiver(RemoteControlReceiver);
-
 			Toast.makeText(getApplicationContext(), "Playing sound", 
 					Toast.LENGTH_SHORT).show();
 			mediaPlayer.start();
@@ -176,7 +166,6 @@ public class PlayerView extends Activity{
 			onStartThread(100);
 			pauseButton.setEnabled(true);
 			playButton.setEnabled(false);
-			// Start playback.
 		}
 		else 
 			onBackPressed();
@@ -185,7 +174,6 @@ public class PlayerView extends Activity{
 	public void pause(View view){
 		Toast.makeText(getApplicationContext(), "Pausing sound", 
 				Toast.LENGTH_SHORT).show();
-
 		mediaPlayer.pause();
 		pauseButton.setEnabled(false);
 		playButton.setEnabled(true);
@@ -193,7 +181,7 @@ public class PlayerView extends Activity{
 	}	
 
 	// UPDATER
-	
+
 	private void onStopThread() {
 		UpdateSongTime.stop();
 		mHandler.removeCallbacks(UpdateSongTime);
@@ -206,27 +194,14 @@ public class PlayerView extends Activity{
 	private StoppableRunnable UpdateSongTime = new StoppableRunnable() {
 		public void stoppableRun() {
 			startTime = mediaPlayer.getCurrentPosition();
-			/*if (startTime >= mediaPlayer.getDuration())
-			{
-				mediaPlayer.seekTo(mediaPlayer.getDuration());
-				pauseButton.setEnabled(false);
-				playButton.setEnabled(true);
-				startTime = 0;
-				seekbar.setProgress((int)startTime);
-				Log.w("stopable", "startTime=0");
-				onStopThread();
-				am.abandonAudioFocus(afChangeListener);
-			}
-			else{*/
-				updateSeekbar(startTime);
-				onStartThread(100);
-			//}
+			updateSeekbar(startTime);
+			onStartThread(100);
 		}
 	};
-	
+
 	private void updateSeekbar(double startTime)
 	{
-		startTimeField.setText(String.format("%d:%d", 
+		startTimeField.setText(String.format("%02d:%02d", 
 				TimeUnit.MILLISECONDS.toMinutes((long) startTime),
 				TimeUnit.MILLISECONDS.toSeconds((long) startTime) - 
 				TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.
@@ -236,7 +211,7 @@ public class PlayerView extends Activity{
 	}
 
 	// FILE ACTION
-	
+
 	private void actionRename(String newName)
 	{
 		File oldPath = new File(basePath);
@@ -292,13 +267,11 @@ public class PlayerView extends Activity{
 	{
 		File sourceLocation = new File(basePath+fileName);
 		File destSound = new File(Environment.getExternalStorageDirectory()+File.separator+"media"+File.separator+"ringtones"+File.separator+fileName);
-
 		try {
 			copyFile(sourceLocation, destSound);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	private void setMediaDB(File targetLocation)
@@ -314,7 +287,6 @@ public class PlayerView extends Activity{
 		values.put(MediaStore.Audio.Media.IS_NOTIFICATION, true);
 		values.put(MediaStore.Audio.Media.IS_ALARM, true);
 		values.put(MediaStore.Audio.Media.IS_MUSIC, false);
-		//Insert it into the database
 		Uri uri = MediaStore.Audio.Media.getContentUriForPath(targetLocation.getAbsolutePath());
 		this.getContentResolver().insert(uri, values);
 	}
@@ -336,7 +308,7 @@ public class PlayerView extends Activity{
 		out.close();
 		setMediaDB(targetLocation);
 	}
-	
+
 	private static String getMimeType(String url)
 	{
 		String type = null;
@@ -436,18 +408,17 @@ public class PlayerView extends Activity{
 			}
 		});
 	}
-	
+
 	OnAudioFocusChangeListener afChangeListener = new OnAudioFocusChangeListener() {
 		public void onAudioFocusChange(int focusChange) {
 			if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT 
 					|| focusChange == AudioManager.AUDIOFOCUS_LOSS) {
 				pauseMediaPlayer();
 			} else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-					mediaPlayer.start();
-					pauseButton.setEnabled(true);
-					playButton.setEnabled(false);
+				mediaPlayer.start();
+				pauseButton.setEnabled(true);
+				playButton.setEnabled(false);
 			}
 		}
 	};
-
 }
