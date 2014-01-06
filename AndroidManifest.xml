@@ -39,28 +39,12 @@
                 android:value="com.persil.droidrecorder.MainActivity" />
         </activity>
         <activity
-            android:name="com.persil.droidrecorder.BrowserViewActivity"
-            android:label="@string/title_activity_bowser_view"
-            android:parentActivityName="com.persil.droidrecorder.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.persil.droidrecorder.MainActivity" />
-        </activity>
-        <activity
             android:name="com.persil.droidrecorder.FileChooser"
             android:label="@string/title_activity_file_chooser"
             android:parentActivityName="com.persil.droidrecorder.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.persil.droidrecorder.MainActivity" />
-        </activity>
-        <activity
-            android:name="com.persil.droidrecorder.FileArrayAdapter"
-            android:label="@string/title_activity_file_array_adapter" >
-        </activity>
-        <activity
-            android:name="com.persil.droidrecorder.Item"
-            android:label="@string/title_activity_item" >
         </activity>
         <activity
             android:name="com.persil.droidrecorder.PlayerView"
@@ -72,5 +56,4 @@
                 android:value="com.persil.droidrecorder.FileChooser" />
         </activity>
     </application>
-
 </manifest>
