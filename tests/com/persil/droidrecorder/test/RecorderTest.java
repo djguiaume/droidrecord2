@@ -1,6 +1,9 @@
 package com.persil.droidrecorder.test;
 
+import java.io.File;
+
 import android.media.MediaRecorder;
+import android.os.Environment;
 
 import com.persil.droidrecorder.Recorder;
 
@@ -29,7 +32,7 @@ public class RecorderTest extends TestCase {
 		if ((recorder.setExention(".3gp")) == true)
 			System.out.println("Extention .mp4 Set Correctly !");
 		else
-			fail("try to set Extention with null string !");	
+			fail("try to set Extention with null string !");
 		recorder.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		if (recorder.updateOutputFile() == true)
 			System.out.println("File update Correctly !");
@@ -57,7 +60,7 @@ public class RecorderTest extends TestCase {
 			System.out.println("DeleteFileRecording Success !");
 		else
 			fail("DeleteFileRecording Fail !");
-		
+
 		Recorder recorder2 = new Recorder();
 		if (recorder2.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4) == true)
 			System.out.println("InitRecord Correctly !");
@@ -66,7 +69,7 @@ public class RecorderTest extends TestCase {
 		if ((recorder2.setExention(".3gp")) == true)
 			System.out.println("Extention .mp4 Set Correctly !");
 		else
-			fail("try to set Extention with null string !");	
+			fail("try to set Extention with null string !");
 		recorder2.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		if (recorder2.updateOutputFile() == true)
 			System.out.println("File update Correctly !");
@@ -94,7 +97,12 @@ public class RecorderTest extends TestCase {
 			System.out.println("RenameRecording Success !");
 		else
 			fail("RenameRecording Fail !");
-		recorder2.deleteFile();
+		File toDelete = new File(Environment.getExternalStorageDirectory()
+				+ File.separator + "DroidRecorder" + File.separator
+				+ "RenameTest.3gp");
+		if (toDelete.exists() == false)
+			fail("fail : file doesn't exist");
+		toDelete.delete();
 	}
 
 	public void testSetExention() {
@@ -102,9 +110,9 @@ public class RecorderTest extends TestCase {
 		if ((recorder.setExention(".mp4")) == true)
 			System.out.println("Extention .mp4 Set Correctly !");
 		else
-			fail("try to set Extention with null string !");	
+			fail("try to set Extention with null string !");
 	}
-	
+
 	public void testUpdateOutputFile() {
 		Recorder recorder = new Recorder();
 		recorder.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4);
@@ -115,16 +123,16 @@ public class RecorderTest extends TestCase {
 		else
 			fail("File didn't update Correctly !");
 	}
-	
+
 	public void testInitRecord() {
 		Recorder recorder = new Recorder();
 		if (recorder.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4) == true)
 			System.out.println("InitRecord Correctly !");
 		else
 			fail("InitRecord didn't work Correctly !");
-		
+
 	}
-	
+
 	public void testStartRecording() {
 		Recorder recorder = new Recorder();
 		recorder.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4);
@@ -145,7 +153,7 @@ public class RecorderTest extends TestCase {
 		recorder.resetRecording();
 		recorder.deleteFile();
 	}
-	
+
 	public void testStopRecording() {
 		Recorder recorder = new Recorder();
 		recorder.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4);
@@ -160,13 +168,13 @@ public class RecorderTest extends TestCase {
 			e.printStackTrace();
 		}
 		if (recorder.stopRecording() == true)
-		System.out.println("StopRecording Success !");
-	else
-		fail("StopRecording Fail !");
+			System.out.println("StopRecording Success !");
+		else
+			fail("StopRecording Fail !");
 		recorder.resetRecording();
 		recorder.deleteFile();
 	}
-	
+
 	public void testResetRecording() {
 		Recorder recorder = new Recorder();
 		recorder.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4);
@@ -187,6 +195,7 @@ public class RecorderTest extends TestCase {
 			fail("ResetRecording Fail !");
 		recorder.deleteFile();
 	}
+
 	public void testDeleteFile() {
 		Recorder recorder = new Recorder();
 		recorder.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4);
@@ -207,6 +216,7 @@ public class RecorderTest extends TestCase {
 		else
 			fail("DeleteFileRecording Fail !");
 	}
+
 	public void testRename() {
 		Recorder recorder2 = new Recorder();
 		recorder2.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4);
@@ -229,6 +239,13 @@ public class RecorderTest extends TestCase {
 		if (recorder2.rename("") == true)
 			fail("RenameRecording renamed with and empty name");
 		else
-			System.out.println("RenameRecording with an empty parameter : success");
+			System.out
+					.println("RenameRecording with an empty parameter : success");
+		File toDelete = new File(Environment.getExternalStorageDirectory()
+				+ File.separator + "DroidRecorder" + File.separator
+				+ "RenameTest.3gp");
+		if (toDelete.exists() == false)
+			fail("fail : file doesn't exist");
+		toDelete.delete();
 	}
 }
