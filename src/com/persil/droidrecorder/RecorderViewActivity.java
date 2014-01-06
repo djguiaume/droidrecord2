@@ -137,6 +137,7 @@ public class RecorderViewActivity extends Activity {
         	})
         	.setNegativeButton(
         			R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
         		public void onClick(DialogInterface dialog, int id) {
         			Log.d("RecorderView", "Cancel clicked");
         			recorder.deleteFile();
