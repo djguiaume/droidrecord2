@@ -120,13 +120,13 @@ public class Recorder {
 	
 	public boolean rename(String newName) {
 		if (!newName.isEmpty() && (!file_path.isEmpty() && !Extantion.isEmpty())) {
-	   File basePath = new File(Environment.getExternalStorageDirectory()
-			   +File.separator+"DroidRecorder"+File.separator);
-	   String fileName = file_path.substring(file_path.lastIndexOf(File.separator));
-	   File from = new File(basePath,fileName+Extantion);
-	   File to = new File(basePath,newName+Extantion);
-	   from.renameTo(to);
-	   return true;
+			File basePath = new File(Environment.getExternalStorageDirectory()
+					+File.separator+"DroidRecorder"+File.separator);
+			String fileName = file_path.substring(file_path.lastIndexOf(File.separator));
+			File from = new File(basePath,fileName+Extantion);
+			File to = new File(basePath,newName+Extantion);
+			from.renameTo(to);
+			return true;
 		}
 		return false;
 	}

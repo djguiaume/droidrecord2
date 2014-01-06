@@ -25,20 +25,20 @@ public class RecorderTest extends TestCase {
 		if (recorder.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4) == true)
 			System.out.println("InitRecord Correctly !");
 		else
-			System.out.println("InitRecord didn't work Correctly !");
+			fail("InitRecord didn't work Correctly !");
 		if ((recorder.setExention(".3gp")) == true)
 			System.out.println("Extention .mp4 Set Correctly !");
 		else
-			System.out.println("try to set Extention with null string !");	
+			fail("try to set Extention with null string !");	
 		recorder.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		if (recorder.updateOutputFile() == true)
 			System.out.println("File update Correctly !");
 		else
-			System.out.println("File didn't update Correctly !");
+			fail("File didn't update Correctly !");
 		if (recorder.startRecording() == true)
 			System.out.println("StartRecording Success !");
 		else
-			System.out.println("StartRecording Fail !");
+			fail("StartRecording Fail !");
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -48,34 +48,34 @@ public class RecorderTest extends TestCase {
 		if (recorder.stopRecording() == true)
 			System.out.println("StopRecording Success !");
 		else
-			System.out.println("StopRecording Fail !");
+			fail("StopRecording Fail !");
 		if (recorder.resetRecording() == true)
 			System.out.println("ResetRecording Success !");
 		else
-			System.out.println("ResetRecording Fail !");
+			fail("ResetRecording Fail !");
 		if (recorder.deleteFile() == true)
 			System.out.println("DeleteFileRecording Success !");
 		else
-			System.out.println("DeleteFileRecording Fail !");
+			fail("DeleteFileRecording Fail !");
 		
 		Recorder recorder2 = new Recorder();
 		if (recorder2.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4) == true)
 			System.out.println("InitRecord Correctly !");
 		else
-			System.out.println("InitRecord didn't work Correctly !");
+			fail("InitRecord didn't work Correctly !");
 		if ((recorder2.setExention(".3gp")) == true)
 			System.out.println("Extention .mp4 Set Correctly !");
 		else
-			System.out.println("try to set Extention with null string !");	
+			fail("try to set Extention with null string !");	
 		recorder2.setFormat(MediaRecorder.OutputFormat.THREE_GPP);
 		if (recorder2.updateOutputFile() == true)
 			System.out.println("File update Correctly !");
 		else
-			System.out.println("File didn't update Correctly !");
+			fail("File didn't update Correctly !");
 		if (recorder2.startRecording() == true)
 			System.out.println("StartRecording Success !");
 		else
-			System.out.println("StartRecording Fail !");
+			fail("StartRecording Fail !");
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -85,15 +85,16 @@ public class RecorderTest extends TestCase {
 		if (recorder2.stopRecording() == true)
 			System.out.println("StopRecording Success !");
 		else
-			System.out.println("StopRecording Fail !");
+			fail("StopRecording Fail !");
 		if (recorder2.resetRecording() == true)
 			System.out.println("ResetRecording Success !");
 		else
-			System.out.println("ResetRecording Fail !");
+			fail("ResetRecording Fail !");
 		if (recorder2.rename("RenameTest") == true)
 			System.out.println("RenameRecording Success !");
 		else
-			System.out.println("RenameRecording Fail !");
+			fail("RenameRecording Fail !");
+		recorder2.deleteFile();
 	}
 
 	public void testSetExention() {
@@ -101,7 +102,7 @@ public class RecorderTest extends TestCase {
 		if ((recorder.setExention(".mp4")) == true)
 			System.out.println("Extention .mp4 Set Correctly !");
 		else
-			System.out.println("try to set Extention with null string !");	
+			fail("try to set Extention with null string !");	
 	}
 	
 	public void testUpdateOutputFile() {
@@ -112,7 +113,7 @@ public class RecorderTest extends TestCase {
 		if (recorder.updateOutputFile() == true)
 			System.out.println("File update Correctly !");
 		else
-			System.out.println("File didn't update Correctly !");
+			fail("File didn't update Correctly !");
 	}
 	
 	public void testInitRecord() {
@@ -120,7 +121,7 @@ public class RecorderTest extends TestCase {
 		if (recorder.initRecord(".mp4", MediaRecorder.OutputFormat.MPEG_4) == true)
 			System.out.println("InitRecord Correctly !");
 		else
-			System.out.println("InitRecord didn't work Correctly !");
+			fail("InitRecord didn't work Correctly !");
 		
 	}
 	
@@ -133,7 +134,7 @@ public class RecorderTest extends TestCase {
 		if (recorder.startRecording() == true)
 			System.out.println("StartRecording Success !");
 		else
-			System.out.println("StartRecording Fail !");
+			fail("StartRecording Fail !");
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -161,7 +162,7 @@ public class RecorderTest extends TestCase {
 		if (recorder.stopRecording() == true)
 		System.out.println("StopRecording Success !");
 	else
-		System.out.println("StopRecording Fail !");
+		fail("StopRecording Fail !");
 		recorder.resetRecording();
 		recorder.deleteFile();
 	}
@@ -183,7 +184,7 @@ public class RecorderTest extends TestCase {
 		if (recorder.resetRecording() == true)
 			System.out.println("ResetRecording Success !");
 		else
-			System.out.println("ResetRecording Fail !");
+			fail("ResetRecording Fail !");
 		recorder.deleteFile();
 	}
 	public void testDeleteFile() {
@@ -204,7 +205,7 @@ public class RecorderTest extends TestCase {
 		if (recorder.deleteFile() == true)
 			System.out.println("DeleteFileRecording Success !");
 		else
-			System.out.println("DeleteFileRecording Fail !");
+			fail("DeleteFileRecording Fail !");
 	}
 	public void testRename() {
 		Recorder recorder2 = new Recorder();
@@ -224,10 +225,10 @@ public class RecorderTest extends TestCase {
 		if (recorder2.rename("RenameTest") == true)
 			System.out.println("RenameRecording Success !");
 		else
-			System.out.println("RenameRecording Fail !");
+			fail("RenameRecording Fail !");
 		if (recorder2.rename("") == true)
-			System.out.println("RenameRecording Success !");
+			fail("RenameRecording renamed with and empty name");
 		else
-			System.out.println("RenameRecording Fail !");
+			System.out.println("RenameRecording with an empty parameter : success");
 	}
 }
