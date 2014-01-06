@@ -51,7 +51,6 @@ public class RecorderViewActivity extends Activity {
     			recorder.setExention(getExt());
     			recorder.setFormat(getFormat());
     	    }
-
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
     			recorder.setExention(getExt());
@@ -84,14 +83,7 @@ public class RecorderViewActivity extends Activity {
 	public void onConfigurationChanged(Configuration newConfig) {
 		long recordTimeSave =  recordTimer.getBase();
 		super.onConfigurationChanged(newConfig);
-		if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
-			setContentView(R.layout.activity_recorder_view);
-			Log.d("On Config Change","LANDSCAPE");
-		}
-		else {
-			setContentView(R.layout.activity_recorder_view);
-			Log.d("On Config Change","PORTRAIT");
-		}
+		setContentView(R.layout.activity_recorder_view);
 		recordTimer = (Chronometer) findViewById(R.id.recordTimer);
 		if (recording) {
 			recordTimer.setBase(recordTimeSave);
@@ -102,7 +94,6 @@ public class RecorderViewActivity extends Activity {
     
     public void onRecordButtonClick(View view) {
     	Log.d("RecorderView", "recordButton clicked");
-    	
 		recorder.startRecording();
 		recordTimer.setBase(SystemClock.elapsedRealtime());
 		recordTimer.start();
@@ -131,7 +122,6 @@ public class RecorderViewActivity extends Activity {
     private void showSaveDialog() {
     	AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-
         save_view = inflater.inflate(R.layout.save_dialog, null);
         builder.setView(save_view)
         	.setPositiveButton(
