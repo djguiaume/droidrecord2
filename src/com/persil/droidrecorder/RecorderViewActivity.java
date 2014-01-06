@@ -36,8 +36,8 @@ public class RecorderViewActivity extends Activity {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             // Show the Up button in the action bar.
             getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
 
+		}
 		recorder = new Recorder();
 		recorder.initRecord(getExt(), getFormat());
 

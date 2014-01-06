@@ -12,6 +12,10 @@
     <string name="newapi">NewApi</string>
     <string name="title_activity_bowser_view">BowserViewActivity</string>
 
+    
+    <string name="main_activity_record">Record</string>
+    <string name="main_activity_browse">Browse</string>
+
     <string name="recorder_activity_chronometer">Chronometer</string>
     <string name="recorder_activity_start_recording">Start recording</string>
     <string name="recorder_activity_stop_recording">Stop recording</string>
@@ -21,6 +25,17 @@
         <item>AMR (Narrowband) file format</item>
     </string-array>
 
+    
+    <string name="player_activity_start_time">00:00</string>
+    <string name="player_activity_file_name">File name</string>
+    <string name="player_activity_play">Play</string>
+    <string name="player_activity_pause">Pause</string>
+
+    <string name="file_view_music">Music</string>
+
+    <string name="rename_dialog_new_name">New name:</string>
+    <string name="rename_dialog_hint">New name</string>
+    
     <string name="title_activity_file_chooser">FileChooser</string>
     <string name="title_activity_file_array_adapter">FileArrayAdapter</string>
     <string name="title_activity_item">Item</string>

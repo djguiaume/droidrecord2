@@ -230,7 +230,7 @@ public class PlayerView extends Activity{
 	private void showRename()
 	{
 		LayoutInflater li = LayoutInflater.from(context);
-		View promptsView = li.inflate(R.layout.prompt, null);
+		View promptsView = li.inflate(R.layout.rename_dialog, null);
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 		alertDialogBuilder.setView(promptsView);
 

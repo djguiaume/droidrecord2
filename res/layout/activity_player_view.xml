@@ -16,7 +16,7 @@
         android:id="@+id/TextView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00:00"
+        android:text="@string/player_activity_start_time"
         android:textSize="80sp" />
 
     <SeekBar
@@ -28,7 +28,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="@string/player_activity_file_name" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -40,6 +40,7 @@
             android:id="@+id/playButton"
             android:layout_width="70dp"
             android:layout_height="59dp"
+            android:contentDescription="@string/player_activity_play"
             android:onClick="play"
             android:scaleType="fitCenter"
             android:src="@drawable/play" />
@@ -48,9 +49,11 @@
             android:id="@+id/pauseButton"
             android:layout_width="70dp"
             android:layout_height="59dp"
+            android:contentDescription="@string/player_activity_pause"
             android:onClick="pause"
             android:scaleType="fitCenter"
             android:src="@drawable/pause" />
+
     </LinearLayout>
 
 </LinearLayout>
