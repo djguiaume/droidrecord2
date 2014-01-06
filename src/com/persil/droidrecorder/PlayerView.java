@@ -44,7 +44,6 @@ import com.persil.droidrecorder2.R;
 public class PlayerView extends Activity{
 
 	private static String fileName;
-
 	public TextView songName,startTimeField,endTimeField;
 	private MediaPlayer mediaPlayer;
 	private double startTime = 0;
